@@ -19,13 +19,13 @@ class NasaService
   end
 
   def threats_by_date
-    y = actual_threats.group_by do |asteroid|
+    actual_threats.group_by do |asteroid|
       asteroid.date
     end
   end
 
   def actual_threats
-    x = get_asteroids.select do |asteroid|
+    get_asteroids.select do |asteroid|
       asteroid.hazardous == true
     end
   end

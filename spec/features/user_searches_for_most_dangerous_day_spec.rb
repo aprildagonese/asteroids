@@ -25,14 +25,15 @@ feature "Guest user searches for Most Dangerous Day" do
     fill_in :end_date, with: "2018-01-07"
     click_on "Determine Most Dangerous Day"
 
-    save_and_open_page
 
     expect(current_path).to eq(most_dangerous_day_path)
     expect(page).to have_content("Most Dangerous Day")
     expect(page).to have_content("January 1, 2018 - January 7, 2018")
+
     within ".most-dangerous-date" do
       expect(page).to have_content("January 1, 2018")
     end
+    
     within ".asteroids" do
       expect(page).to have_css(".asteroid", count: 3)
       expect(page).to have_content("Name: (2014 KT76)")
