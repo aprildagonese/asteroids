@@ -35,9 +35,9 @@ end
 
 describe "GET /user/favorites" do
   it "returns a list of favorites" do
-    user = create(:user, email: "uncle.jesse@example.com", name: "Jesse Katsopolis")
-    api_key = create(:api_key)
-    favorite = create(:favorite, user: user, neo_reference_id: "2153306")
+    april = create(:user, email: "adag@email.com", name: "April D")
+    api_key = create(:api_key, value: "abc123", user: april)
+    fave = create(:favorite, user: april, neo_reference_id: "2153306")
 
     get "/api/v1/user/favorites?api_key=#{api_key.value}"
 
