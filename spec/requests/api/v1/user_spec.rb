@@ -32,3 +32,24 @@ describe "GET /user" do
     expect(response.status).to eq 401
   end
 end
+
+describe "GET /user/favorites" do
+  it "returns a list of favorites" do
+    user = create(:user, email: "uncle.jesse@example.com", name: "Jesse Katsopolis")
+    api_key = create(:api_key)
+    favorite = create(:favorite, user: user, neo_reference_id: "2153306")
+
+    get "/api/v1/user/favorites?api_key=#{api_key.value}"
+
+    expect(response).to be_successful
+
+    favorite = JSON.parse(response.body, symbolize_names: true)
+
+    expect(favorite[0]["id"]).to eq("1")
+    expect(favorite[0]["neo_reference_id"]).to eq("2153306")
+    expect(favorite[0]["user_id"]).to eq("1")
+    expect(favorite[0]["asteroid"]).to be_a(Hash)
+    expect(favorite[0]["asteroid"]["name"]).to eq("153306 (2001 JL1)")
+    expect(favorite[0]["asteroid"]["is_potentially_hazardous_asteroid"]).to eq(false)
+  end
+end

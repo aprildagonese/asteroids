@@ -1,0 +1,14 @@
+<h1>Most Dangerous Day</h1>
+<strong>Search dates: <%= asteroid_facade.query_dates %></strong>
+
+<h3 class="most-dangerous-date">Result: <%= asteroid_facade.most_dangerous_day %></h3>
+
+<section class="asteroids">
+  <h4>Asteroid Threats:</h4>
+  <% asteroid_facade.asteroids.each do |asteroid| %>
+    <ul class="asteroid">
+      <li>Name: <%= asteroid.name %></li>
+      <li>NEO Reference ID: <%= asteroid.id %></li>
+    </ul>
+  <% end  %>
+</section>
